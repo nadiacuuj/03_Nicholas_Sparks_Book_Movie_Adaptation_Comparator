@@ -70,22 +70,7 @@ def compare_performance(title):
 
 def print_instructions():
     print("\n" + "=" * 60)
-    print("Nicholas Sparks Book vs. Movie Performance Comparator")
-    print("=" * 60)
-    print("This program compares the performance of Nicholas Sparks' books")
-    print("and their movie adaptations using data from Goodreads and Rotten Tomatoes.")
-    print("=" * 60)
-
-def print_menu():
-    print("\nChoose a title:")
-    print("1. The Notebook")
-    print("2. Safe Haven")
-    print("3. Message in a Bottle")
-    print("4. Exit")
-
-def print_instructions():
-    print("\n" + "=" * 60)
-    print("Nicholas Sparks Book vs. Movie Performance Comparator")
+    print("Nicholas Sparks Book vs. Movie Adaptation Comparator")
     print("=" * 60)
     print("This program compares the performance of Nicholas Sparks' books")
     print("and their movie adaptations using data from Google Books and Rotten Tomatoes.")
