@@ -29,7 +29,7 @@ python data_extraction.py
 python main.py
 
 ## Files
-- I split my "main" code into 2 scripts because at the time of writing this I hit my googlebooks API daily query limit. Fortuantely I'd already finished the data extraction code, so I instead started a whole new script solely for the data analysis and implementation which fetches from the imported CSV file.
+I split my "main" code into 2 scripts because at the time of writing this I hit my googlebooks API daily query limit. Fortuantely I'd already finished the data extraction code, so I instead started a whole new script solely for the data analysis and implementation which fetches from the imported CSV file.
 1) data_extraction.py: Outputs merged book and movie data as CSV file
 2) main.py: Preliminary data cleaning and Main analysis
 3) .env: Holds API key
