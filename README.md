@@ -29,9 +29,10 @@ python data_extraction.py
 python main.py
 
 ## Files
-- data_extraction.py: Outputs merged book and movie data as CSV file
-- main.py: Preliminary data cleaning and Main analysis
-- .env: Holds API key
+- I split my "main" code into 2 scripts because at the time of writing this I hit my googlebooks API daily query limit. Fortuantely I'd already finished the data extraction code, so I instead started a whole new script solely for the data analysis and implementation which fetches from the imported CSV file.
+1) data_extraction.py: Outputs merged book and movie data as CSV file
+2) main.py: Preliminary data cleaning and Main analysis
+3) .env: Holds API key
 
 ## Limitations
 - API Rate Limits: The Google Books API has a daily query limit, so be mindful of hitting rate limits when running the program multiple times in a day.

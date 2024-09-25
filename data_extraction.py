@@ -13,7 +13,8 @@ import pandas as pd
 # To retrieve, first load environment variables from .env file
 load_dotenv()
 # Now, we can get the API key
-GOOGLEBOOKS_API_KEY = os.getenv('GOOGLEBOOKS_API_KEY')
+GOOGLEBOOKS_API_KEY = os.getenv('GOOGLEBOOKS_API_KEY') 
+# Note: my daily query limit just got hit so this part might not run
 
 # Check if the API key is loaded
 if GOOGLEBOOKS_API_KEY is None:
@@ -134,8 +135,8 @@ for book in book_data:
                     combined_entry = {**book, **movie}
                     combined_data.append(combined_entry)
 
-# # Convert to DataFrame and save to CSV
-# df_combined = pd.DataFrame(combined_data)
-# df_combined.to_csv('nicholas_sparks_combined.csv', index=False)
+# Convert to DataFrame and save to CSV
+df_combined = pd.DataFrame(combined_data)
+df_combined.to_csv('nicholas_sparks_combined.csv', index=False)
 
-# print("Combined data saved to nicholas_sparks_combined.csv")
+print("Combined data saved to nicholas_sparks_combined.csv")
