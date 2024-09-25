@@ -305,7 +305,52 @@ def get_book_details(title):
 #     print(f"Title: {movie['Title']}, Tomatometer: {movie['Tomatometer']}, Audience Score: {movie['Audience Score']}, Box Office: {movie['Box Office']}, Year: {movie['Year']}")
 
 
-# without audience ratings (problem with <rt>)
+# # trying smth out
+# def scrape_rotten_tomatoes():
+#     ROTTENTOMATOES_URL = "https://www.rottentomatoes.com/celebrity/nicholas-sparks"
+#     response = requests.get(ROTTENTOMATOES_URL)
+#     soup = BeautifulSoup(response.content, 'html.parser')
+   
+#     # Find all <td> elements with the class "celebrity-filmography__title"
+#     title_cells = soup.find_all('td', class_='celebrity-filmography__title')
+#     titles = [cell.find('a').text.strip() for cell in title_cells if cell.find('a')]
+
+#     # Find all <span> elements with the class "icon__tomatometer-score"
+#     tomatometer_spans = soup.find_all('span', class_='icon__tomatometer-score')
+#     tomatometer_scores = [span.text.strip() for span in tomatometer_spans]
+
+#     # Find all <rt-text> elements with context="label" for audience scores
+#     audience_score_elements = soup.find_all('rt-text', attrs={'context': 'label'})
+#     audience_scores = [element.text.strip() for element in audience_score_elements]
+
+#     # Find all <td> elements with the class "celebrity-filmography__box-office"
+#     box_office_cells = soup.find_all('td', class_='celebrity-filmography__box-office')
+#     box_office_data = [cell.text.strip() for cell in box_office_cells]
+
+#     # Find all <td> elements with the class "celebrity-filmography__year"
+#     year_cells = soup.find_all('td', class_='celebrity-filmography__year')
+#     years = [cell.text.strip() for cell in year_cells]
+
+#     movie_data = []
+#     for title, tomatometer, audience, box_office, year in zip(titles, tomatometer_scores, audience_scores, box_office_data, years):
+#         movie_data.append({
+#             'Title': title,
+#             'Tomatometer': tomatometer,
+#             'Audience Score': audience,
+#             'Box Office': box_office,
+#             'Year': year
+#         })
+    
+#     return movie_data
+
+# # Call the function to scrape the data
+# movies = scrape_rotten_tomatoes()
+# # Print each movie's title, Tomatometer score, Audience Score, Box Office, and Year
+# for movie in movies:
+#     print(f"Title: {movie['Title']}, Tomatometer: {movie['Tomatometer']}, Audience Score: {movie['Audience Score']}, Box Office: {movie['Box Office']}, Year: {movie['Year']}")
+
+
+# with audience ratings commented out (problem with <rt>)
 def scrape_rotten_tomatoes():
     ROTTENTOMATOES_URL = "https://www.rottentomatoes.com/celebrity/nicholas-sparks" # URL of Nicholas Sparks' Rotten Tomatoes page
     response = requests.get(ROTTENTOMATOES_URL) # Send a GET request to the URL
@@ -357,46 +402,43 @@ for movie in movies:
 
 
 
-# # trying smth out
-# def scrape_rotten_tomatoes():
-#     ROTTENTOMATOES_URL = "https://www.rottentomatoes.com/celebrity/nicholas-sparks"
-#     response = requests.get(ROTTENTOMATOES_URL)
-#     soup = BeautifulSoup(response.content, 'html.parser')
+# with audience ratings compeltely taken out (the version thats in main rn)
+def scrape_rotten_tomatoes():
+    ROTTENTOMATOES_URL = "https://www.rottentomatoes.com/celebrity/nicholas-sparks" # URL of Nicholas Sparks' Rotten Tomatoes page
+    response = requests.get(ROTTENTOMATOES_URL) # Send a GET request to the URL
+    soup = BeautifulSoup(response.content, 'html.parser') # Parse the HTML content of the page
    
-#     # Find all <td> elements with the class "celebrity-filmography__title"
-#     title_cells = soup.find_all('td', class_='celebrity-filmography__title')
-#     titles = [cell.find('a').text.strip() for cell in title_cells if cell.find('a')]
+    # Find all <td> elements with the class "celebrity-filmography__title"
+    title_cells = soup.find_all('td', class_='celebrity-filmography__title')
+    # Extract the text from the <a> elements within each <td>
+    titles = [cell.find('a').text.strip() for cell in title_cells if cell.find('a')] # This creates a list of movie titles
 
-#     # Find all <span> elements with the class "icon__tomatometer-score"
-#     tomatometer_spans = soup.find_all('span', class_='icon__tomatometer-score')
-#     tomatometer_scores = [span.text.strip() for span in tomatometer_spans]
+    # Find all <span> elements with the class "icon__tomatometer-score"
+    tomatometer_spans = soup.find_all('span', class_='icon__tomatometer-score')
+    tomatometer_scores = [span.text.strip() for span in tomatometer_spans]
 
-#     # Find all <rt-text> elements with context="label" for audience scores
-#     audience_score_elements = soup.find_all('rt-text', attrs={'context': 'label'})
-#     audience_scores = [element.text.strip() for element in audience_score_elements]
+    # Find all <td> elements with the class "celebrity-filmography__box-office"
+    box_office_cells = soup.find_all('td', class_='celebrity-filmography__box-office')
+    box_office_data = [cell.text.strip() for cell in box_office_cells]
 
-#     # Find all <td> elements with the class "celebrity-filmography__box-office"
-#     box_office_cells = soup.find_all('td', class_='celebrity-filmography__box-office')
-#     box_office_data = [cell.text.strip() for cell in box_office_cells]
+    # Find all <td> elements with the class "celebrity-filmography__year"
+    year_cells = soup.find_all('td', class_='celebrity-filmography__year')
+    years = [cell.text.strip() for cell in year_cells]
 
-#     # Find all <td> elements with the class "celebrity-filmography__year"
-#     year_cells = soup.find_all('td', class_='celebrity-filmography__year')
-#     years = [cell.text.strip() for cell in year_cells]
-
-#     movie_data = []
-#     for title, tomatometer, audience, box_office, year in zip(titles, tomatometer_scores, audience_scores, box_office_data, years):
-#         movie_data.append({
-#             'Title': title,
-#             'Tomatometer': tomatometer,
-#             'Audience Score': audience,
-#             'Box Office': box_office,
-#             'Year': year
-#         })
+    movie_data = []
+    # Use zip() to iterate over titles, tomatometer_scores, box_office_data, and years simultaneously
+    for title, tomatometer, box_office, year in zip(titles, tomatometer_scores, box_office_data, years):
+        movie_data.append({
+            'Title': title,
+            'Tomatometer': tomatometer,
+            'Box Office': box_office,
+            'Year': year
+        })
     
-#     return movie_data
+    return movie_data
 
-# # Call the function to scrape the data
-# movies = scrape_rotten_tomatoes()
-# # Print each movie's title, Tomatometer score, Audience Score, Box Office, and Year
-# for movie in movies:
-#     print(f"Title: {movie['Title']}, Tomatometer: {movie['Tomatometer']}, Audience Score: {movie['Audience Score']}, Box Office: {movie['Box Office']}, Year: {movie['Year']}")
+# Call the function to scrape the data
+movies = scrape_rotten_tomatoes()
+# Print each movie's title, Tomatometer score, Audience Score, Box Office, and Year
+for movie in movies:
+    print(f"Title: {movie['Title']}, Tomatometer: {movie['Tomatometer']}, Box Office: {movie['Box Office']}, Year: {movie['Year']}")
