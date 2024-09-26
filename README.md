@@ -1,5 +1,4 @@
-# Comparing Nicholas Sparks' Books with their Movie Adaptations
-## *Do we still those those same sparks on-screen?*
+# Do we still those those same sparks on-screen?
 
 ## Overview
 A Python project that compares Nicholas Sparks' books with their film adaptations using data from the Google Books API and Rotten Tomatoes.
